@@ -1,0 +1,23 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+run {
+    standardInput = System.in
+}
+
+dependencies {
+    compile 'com.mashape.unirest:unirest-java:1.4.9'
+    compile 'org.apache.httpcomponents:httpclient:4.5.8'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
+}
+
+group = 'de.sipgate.io.example'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+mainClassName = 'de.sipgate.io.example.App'
