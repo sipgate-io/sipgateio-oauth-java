@@ -6,7 +6,7 @@ we make use of the `/account` endpoint which provides basic account information.
 
 > For further information regarding the sipgate REST API please visit https://api.sipgate.com/v2/doc
 
-For educational purposes we do not use an OAuth client library in this example, but if you plan to implement authentication using OAuth in you application we recommend using one. You can find various client libraries here: [https://oauth.net/code/]([oauth.net](https://oauth.net/code/)).
+For educational purposes we do not use an OAuth client library in this example, but if you plan to implement authentication using OAuth in you application we recommend using one. You can find various client libraries here: [https://oauth.net/code/](https://oauth.net/code/).
 
 
 ## What is OAuth and when to use it
