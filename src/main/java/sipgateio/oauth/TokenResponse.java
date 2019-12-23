@@ -1,4 +1,4 @@
-package de.sipgate.io.example;
+package sipgateio.oauth;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 

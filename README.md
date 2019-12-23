@@ -16,7 +16,7 @@ Applications that use the sipgate REST API on behalf of another user should use 
 
 
 ## Prerequisites
-+ JDK 8
+- JDK 8
 
 
 ## Setup OAuth with sipgate

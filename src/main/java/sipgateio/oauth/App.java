@@ -1,4 +1,4 @@
-package de.sipgate.io.example;
+package sipgateio.oauth;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
