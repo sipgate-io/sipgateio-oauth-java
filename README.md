@@ -30,7 +30,7 @@ You can create a client as follows:
 4. Fill out the **New client** dialog (Find information about the Privacy Policy URL and Terms of use URL [here](#privacy-policy-url-and-terms-of-use-url))
 5. The **Clients** list should contain your new client
 6. Select your client
-7. The entries **Id** and **Secret** are `YOUR_CLIENT_ID` and `YOUR_CLIENT_SECRET` required for the configuration of your application (see [Configuration](#configuration))
+7. The entries **Id** and **Secret** are `CLIENT_ID` and `CLIENT_SECRET` required for the configuration of your application (see [Configuration](#configuration))
 8. Now you just have to add your `REDIRECT_URI` to your Client by clicking the **Add redirect uri** button and fill in the dialog. In our example we provide a server within the application itself so we use `http://localhost:{port}/oauth` (the default port is `8080`). 
 
 Now your Client is ready to use.
@@ -42,25 +42,21 @@ In the Privacy Policy URL and Terms of use URL you must supply in the **New Clie
 
 
 ## Configuration
-In the [application.properties](./src/main/resources/application.properties) file located in `<PROJECT_ROOT>/src/main/resources/` insert `YOUR_CLIENT_ID` and `YOUR_CLIENT_SECRET` obtained in Step 7 above:
+Create the `.env` by copying the [`.env.example`](.env.example) and set the values according to the comment above each variable.
 
-```  
-client_id=YOUR_CLIENT_ID
-client_secret=YOUR_CLIENT_SECRET
-```
 
-The `oauth_scope` defines what kind of access your Client should have to your account and is specific to your respective application. In this case, since we only want to get your basic account information as an example, the scope `account:read` is sufficient.
+The `OAUTH_SCOPE` defines what kind of access your Client should have to your account and is specific to your respective application. In this case, since we only want to get your basic account information as an example, the scope `account:read` is sufficient.
 
 ```
-oauth_scope=account:read
+OAUTH_SCOPE=account:read
 ```
 > Visit https://developer.sipgate.io/rest-api/oauth2-scopes/ to see all available scopes
 
-The `redirect_uri` which we have previously used in the creation of our Client is supplied to the sipgate login page to specify where you want to be redirected after successful login. As explained above, our application provides a small web server itself that handles HTTP requests directed at `http://localhost:8080/oauth`. In case there is already a service listening on port `8080` of your machine you can choose a different port number, but be sure to adjust both the `redirect_uri` and the `port` property accordingly.
+The `REDIRECT_URI` which we have previously used in the creation of our Client is supplied to the sipgate login page to specify where you want to be redirected after successful login. As explained above, our application provides a small web server itself that handles HTTP requests directed at `http://localhost:8080/oauth`. In case there is already a service listening on port `8080` of your machine you can choose a different port number, but be sure to adjust both the `REDIRECT_URI` and the `PORT` property accordingly.
 
 ```
-redirect_uri=http://localhost:8080/oauth
-port=8080
+REDIRECT_URI=http://localhost:8080/oauth
+PORT=8080
 ```
 
 ## Execution
@@ -98,7 +94,7 @@ public static void main(String[] args) {
 }
 ```
 
-After loading the configuration from the [application.properties](./src/main/resources/application.properties) file we start the web server. We then generate a unique identifier for our authorization process so that we can match a server response to our request later. The authorization URI is composed from the properties previously loaded from the configuration file and printed to the console.
+After loading the configuration from the [.env](.env) file we start the web server. We then generate a unique identifier for our authorization process so that we can match a server response to our request later. The authorization URI is composed from the properties previously loaded from the configuration file and printed to the console.
 
 Opening the link in your browser takes you to the sipgate login page where you need to confirm the scope that your Client is requesting access to before logging in with your sipgate credentials. You are then redirected to `http://localhost:8080/oauth` and our application's web server receives your request. The corresponding logic is contained in the `handleRequest` method:
 
@@ -189,7 +185,7 @@ Possible reasons are:
 ### "java.net.BindException: Address already in use"
 Possible reasons are:
 - another instance of the application is running
-- the port configured in the [application.properties](./src/main/resources/application.properties) file is used by another application.
+- the port configured in the [.env](.env) file is used by another application.
 
 
 ### "java.net.SocketException: Permission denied"
@@ -199,13 +195,13 @@ Possible reasons are:
 
 ### "invalid parameter: redirect_uri"
 Possible reasons are:
-- the redirect_uri in the [application.properties](./src/main/resources/application.properties) is invalid or not set
+- the redirect_uri in the [.env](.env) is invalid or not set
 - the redirect_uri is not correctly configured the sipgate Web App (You can find more information about the configuration process in the [Setup OAuth with sipgate](#setup-oauth-with-sipgate) section)
 
 
 ### "client not found" or "invalid client_secret"
 Possible reasons are:
-- the client_id or client_secret configured in the [application.properties](./src/main/resources/application.properties) is invalid. You can check them in the sipgate Web App. See [Setup OAuth with sipgate](#setup-oauth-with-sipgate)
+- the client_id or client_secret configured in the [.env](.env) is invalid. You can check them in the sipgate Web App. See [Setup OAuth with sipgate](#setup-oauth-with-sipgate)
 
 
 ## Related

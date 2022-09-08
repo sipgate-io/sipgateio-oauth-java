@@ -14,6 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class App {
 
@@ -61,16 +62,16 @@ public class App {
 	}
 
 	private static void loadConfiguration() throws IOException {
-		properties.load(App.class.getClassLoader().getResourceAsStream("application.properties"));
+		Dotenv dotenv = Dotenv.load();
 
-		baseUrl = properties.getProperty("base_url");
-		authEndpoint = properties.getProperty("auth_endpoint");
-		clientId = properties.getProperty("client_id");
-		clientSecret = properties.getProperty("client_secret");
-		redirectUri = properties.getProperty("redirect_uri");
-		oauthScope = properties.getProperty("oauth_scope");
-		tokenEndpoint = properties.getProperty("token_endpoint");
-		port = properties.getProperty("port");
+		baseUrl = dotenv.get("BASE_URL");
+		authEndpoint = dotenv.get("AUTH_ENDPOINT");
+		clientId = dotenv.get("CLIENT_ID");
+		clientSecret = dotenv.get("CLIENT_SECRET");
+		redirectUri = dotenv.get("REDIRECT_URI");
+		oauthScope = dotenv.get("OAUTH_SCOPE");
+		tokenEndpoint = dotenv.get("TOKEN_ENDPOINT");
+		port = dotenv.get("PORT");
 	}
 
 	private static void startServer() throws IOException {
